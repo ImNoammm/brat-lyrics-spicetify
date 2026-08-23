@@ -1,6 +1,6 @@
 # brat lyrics
 
-<img width="1794" height="839" alt="image" src="https://github.com/user-attachments/assets/0d421164-7107-4b00-9b2d-6991033dc789" />
+<img width="1782" height="764" alt="image" src="https://github.com/user-attachments/assets/d6be474a-d369-4aa6-a438-dbd6e4f969e8" />
 
 Spotify lyrics that look like the cover of Charli xcx's *brat* — lowercase Arial Narrow, justified edge to edge, slightly out of focus, one line building up word by word.
 
