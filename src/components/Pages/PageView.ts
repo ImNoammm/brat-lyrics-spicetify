@@ -438,12 +438,6 @@ function AppendViewControls(ReAppend: boolean = false) {
     $currentLyricsData.get() === `NO_LYRICS:${SpotifyPlayer.GetUri()}`;
   const isTTMLMakerMode = $ttmlMakerMode.get();
   elem.innerHTML = `
-             and one way out of it — see the .Fullscreen rules in Lyrics/Brat.css,
-             which strip everything here down to #FullscreenToggle. */ ""}
-             (Lyrics/Brat.css hides it in every mode), so the buttons would
-             control nothing. Romanization goes with them — the cover is one
-             block of type, not a lyrics reader with options. */ ""}
-             fullscreen is the whole point of the corner controls. */ ""}
         ${
           IsPIP
             ? ""

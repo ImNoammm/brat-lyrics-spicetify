@@ -146,7 +146,7 @@ function luminance(hex: string): number {
   return 0.2126 * ch[0] + 0.7152 * ch[1] + 0.0722 * ch[2];
 }
 
-const readableOn = (bg: string): string => (luminance(bg) > 0.45 ? "#000000" : "#ffffff");
+const readableOn = (bg: string): string => (luminance(bg) > 0.179 ? "#000000" : "#ffffff");
 
 function setPalette(m: Mounted, bg: string, fg: string): void {
   const page = m.stage.closest<HTMLElement>("#BratLyricsPage");
