@@ -27,7 +27,7 @@ class _HTMLGenericModal extends HTMLElement {
 
 	constructor() {
 		super();
-		this.classList.add("SpicyLyricsModal");
+		this.classList.add("BratLyricsModal");
 		this._onClose = null;
 		this._currentModalId = null;
 	}

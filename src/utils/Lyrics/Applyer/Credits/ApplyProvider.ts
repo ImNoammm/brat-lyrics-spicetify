@@ -1,7 +1,7 @@
 const ProviderMap = {
     "spt": "Spotify",
     "aml": "Apple Music",
-    "spl": "Spicy Lyrics",
+    "spl": "brat lyrics",
     "ldb": "Local DB",
 }
 

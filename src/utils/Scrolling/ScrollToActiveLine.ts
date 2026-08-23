@@ -243,7 +243,7 @@ export function ScrollToActiveLine(ScrollSimplebar: any) {
   const isForceScrollQueued = forceScrollQueued;
   const isSmoothForceScrollQueued = smoothForceScrollQueued;
 
-  //if (Spicetify.Platform.History.location.pathname === "/SpicyLyrics") {
+  //if (Spicetify.Platform.History.location.pathname === "/BratLyrics") {
   const Position = SpotifyPlayer.GetPosition();
   const PositionOffset = 0;
   const ProcessedPosition = Position + PositionOffset;
@@ -549,6 +549,6 @@ export function CleanupScrollEvents() {
   smoothForceScrollQueued = false;
   scrolledToLastLine = false;
   scrolledToFirstLine = false;
-  //console.log("SpicyLyrics scroll events cleaned up."); // Optional log
+  //console.log("BratLyrics scroll events cleaned up."); // Optional log
 }
 // --- END NEW ---

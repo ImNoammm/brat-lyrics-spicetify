@@ -1,5 +1,5 @@
 /* ── Local Lyrics Database Panel ────────────────────────────── */
-sl-generic-modal.SpicyLyricsModal .sl-modal-overlay .sl-ldb-root {
+sl-generic-modal.BratLyricsModal .sl-modal-overlay .sl-ldb-root {
   display: flex;
   flex-direction: column;
   gap: 0;
@@ -177,7 +177,7 @@ sl-generic-modal.SpicyLyricsModal .sl-modal-overlay .sl-ldb-root {
 }
 
 /* ── Icon button (shared) ──────────────────────────────────── */
-sl-generic-modal.SpicyLyricsModal .sl-modal-overlay .sl-ldb-icon-btn {
+sl-generic-modal.BratLyricsModal .sl-modal-overlay .sl-ldb-icon-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -261,7 +261,7 @@ sl-generic-modal.SpicyLyricsModal .sl-modal-overlay .sl-ldb-icon-btn {
 }
 
 /* ── Upload TTML Modal ───────────────────────────────────────── */
-sl-generic-modal.SpicyLyricsModal .sl-modal-overlay .sl-ldb-upload-root {
+sl-generic-modal.BratLyricsModal .sl-modal-overlay .sl-ldb-upload-root {
   display: flex;
   flex-direction: column;
   gap: var(--space-5);

@@ -1,7 +1,7 @@
 import { atom } from "nanostores";
 import { ProjectVersion } from "../../project/config.ts";
 
-export const SETTINGS_KEY = "SL:settings";
+export const SETTINGS_KEY = "BL:settings";
 
 function readSettingsBlob(): Record<string, any> {
   const raw = Spicetify.LocalStorage.get(SETTINGS_KEY);
@@ -64,6 +64,10 @@ export const $minimalLyricsMode = persistAtom<boolean>("minimalLyricsMode", fals
 export const $lineHoverBackground = persistAtom<boolean>("lineHoverBackground", true);
 export const $skipSpicyFont = persistAtom<boolean>("skipSpicyFont", false);
 export const $showNpvDynamicBg = persistAtom<boolean>("showNpvDynamicBg", true);
+
+export const $bratPalette = persistAtom<string>("bratPalette", "cover");
+export const $bratBgColor = persistAtom<string>("bratBgColor", "#8ACE00");
+export const $bratFgColor = persistAtom<string>("bratFgColor", "#000000");
 // Never inject the lyrics card into the Now Playing sidebar at all.
 export const $disableNpvLyrics = persistAtom<boolean>("disableNpvLyrics", false);
 // Pull the whole NPV lyrics card out of the sidebar while the current track has
@@ -98,7 +102,7 @@ export const $playbackOffset = persistAtom<number>("playbackOffset", 0);
 
 // Version atom — NOT persisted, set once at startup
 export const $spicyLyricsVersion = atom<string>(
-  (window as any)._spicy_lyrics_metadata?.LoadedVersion ?? ProjectVersion
+  (window as any)._brat_lyrics_metadata?.LoadedVersion ?? ProjectVersion
 );
 
 // Runtime (ephemeral) atoms

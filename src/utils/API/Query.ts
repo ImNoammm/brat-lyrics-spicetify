@@ -1,6 +1,7 @@
 import Defaults from "../../components/Global/Defaults.ts";
 import Session from "../../components/Global/Session.ts";
 import Logger from "../Logger.ts";
+import { ApiClientVersion } from "../../../project/config.ts";
 
 export type Query = {
   operation: string;
@@ -25,13 +26,12 @@ export interface QueryResultGetter {
 
 const queryLogger = new Logger("API Query");
 
-
 export async function Query(
   queries: Query[],
   headers: Record<string, string> = {}
 ): Promise<QueryResultGetter> {
   const host = Defaults.lyrics.api.url;
-  const clientVersion = Session.SpicyLyrics.GetCurrentVersion();
+  const clientVersion = Session.BratLyrics.ParseVersion(ApiClientVersion);
 
   queryLogger.info("Sending API query request", {
     queries,

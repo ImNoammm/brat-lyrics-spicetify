@@ -1,5 +1,5 @@
 /*
- * Spicy Lyrics — primitives layer
+ * brat lyrics — primitives layer
  * Reusable .sl-* classes that compose tokens. Components opt in by adding
  * these classes alongside (or in place of) their bespoke ones.
  * Loaded right after tokens.css. No layout selectors that could clash with

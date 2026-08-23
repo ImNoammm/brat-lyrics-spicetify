@@ -30,7 +30,7 @@ const LoadPackage = async (importUrl: PackageUrl): Promise<Package | Error | und
     currentlyLoadingPackages.delete(importUrl);
     return pkg as Package;
   } catch (error: any) {
-    throw new Error(`SpicyLyrics [LoadPackage] ${error?.message ?? "An Error Occured"}`);
+    throw new Error(`BratLyrics [LoadPackage] ${error?.message ?? "An Error Occured"}`);
   }
 };
 
@@ -48,6 +48,6 @@ export const RetrievePackage = async (
     if (pkg === undefined) return undefined;
     return pkg as Package;
   } catch (error: any) {
-    throw new Error(`SpicyLyrics [RetrievePackage] ${error?.message ?? "An Error Occured"}`);
+    throw new Error(`BratLyrics [RetrievePackage] ${error?.message ?? "An Error Occured"}`);
   }
 };

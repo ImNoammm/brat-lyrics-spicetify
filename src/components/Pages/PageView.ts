@@ -40,7 +40,7 @@ import {
   IsCompactMode,
 } from "../Utils/CompactMode.ts";
 import Fullscreen, {
-  EnterSpicyLyricsFullscreen,
+  EnterBratLyricsFullscreen,
   ExitFullscreenElement,
 } from "../Utils/Fullscreen.ts";
 import {
@@ -141,7 +141,7 @@ async function OpenPage(
         PageView.IsTippyCapable = false;
     } */
   const elem = document.createElement("div");
-  elem.id = "SpicyLyricsPage";
+  elem.id = "BratLyricsPage";
 
   elem.classList.add("SpicyRenderer");
 
@@ -280,12 +280,6 @@ async function OpenPage(
 
   if (!IsCardMode) {
     Session_OpenNowBar();
-
-    /* const ArtworkButton = document.querySelector<HTMLElement>("#SpicyLyricsPage .ContentBox .NowBar .Header .Artwork");
-
-      ArtworkButton.addEventListener("click", () => {
-          NowBar_SwapSides();
-      }) */
 
     Session_NowBar_SetSide();
 
@@ -444,46 +438,18 @@ function AppendViewControls(ReAppend: boolean = false) {
     $currentLyricsData.get() === `NO_LYRICS:${SpotifyPlayer.GetUri()}`;
   const isTTMLMakerMode = $ttmlMakerMode.get();
   elem.innerHTML = `
+             and one way out of it — see the .Fullscreen rules in Lyrics/Brat.css,
+             which strip everything here down to #FullscreenToggle. */ ""}
+             (Lyrics/Brat.css hides it in every mode), so the buttons would
+             control nothing. Romanization goes with them — the cover is one
+             block of type, not a lyrics reader with options. */ ""}
+             fullscreen is the whole point of the corner controls. */ ""}
         ${
-          Fullscreen.IsOpen || Fullscreen.CinemaViewOpen
+          IsPIP
             ? ""
-            : IsPIP ? "" : `<button id="CinemaView" class="ViewControl">${Icons.CinemaView}</button>`
-        }
-        ${
-          Fullscreen.IsOpen || Fullscreen.CinemaViewOpen
-            ? IsPIP ? "" : `<button id="CompactModeToggle" class="ViewControl">${
-                IsCompactMode()
-                  ? Icons.DisableCompactModeIcon
-                  : Icons.EnableCompactModeIcon
+            : `<button id="FullscreenToggle" class="ViewControl">${
+                Fullscreen.IsOpen ? Icons.CloseFullscreen : Icons.Fullscreen
               }</button>`
-            : ""
-        }
-        <button id="RomanizationToggle" class="ViewControl">
-          ${
-            isRomanized
-              ? Icons.DisableRomanization
-              : Icons.EnableRomanization
-          }
-        </button>
-        ${
-          !Fullscreen.IsOpen &&
-          !Fullscreen.CinemaViewOpen
-            ? IsPIP ? "" : `<button id="NowBarToggle" class="ViewControl">${Icons.NowBar}</button>`
-            : ""
-        }
-        ${
-          NowBarObj.Open
-            ? IsPIP ? "" : `<button id="NowBarSideToggle" class="ViewControl">${Icons.NowBarSideSwap}</button>`
-            : ""
-        }
-        ${
-          Fullscreen.IsOpen
-            ? (IsPIP ? "" : `<button id="FullscreenToggle" class="ViewControl">${
-                Fullscreen.CinemaViewOpen
-                  ? Icons.Fullscreen
-                  : Icons.CloseFullscreen
-              }</button>`)
-            : ""
         }
         ${
           isTTMLMakerMode
@@ -494,30 +460,11 @@ function AppendViewControls(ReAppend: boolean = false) {
         <button id="Close" class="ViewControl">${Icons.Close}</button>
     `;
 
-  let targetElem: HTMLElement | null = elem;
-  if (Fullscreen.IsOpen) {
-    const mediaContent = PageContainer?.querySelector<HTMLElement>(
-      ".ContentBox .NowBar .Header .MediaBox .MediaContent"
-    );
-    if (mediaContent) {
-      TransferElement(elem, mediaContent);
-      const viewControls =
-        mediaContent.querySelector<HTMLElement>(".ViewControls");
-      if (viewControls) {
-        targetElem = viewControls;
-      }
-    }
-  } else {
-    const contentBox = PageContainer?.querySelector<HTMLElement>(".ContentBox");
-    if (
-      PageContainer?.querySelector<HTMLElement>(
-        ".ContentBox .NowBar .Header .ViewControls"
-      ) &&
-      contentBox
-    ) {
-      TransferElement(elem, contentBox);
-    }
+  const contentBox = PageContainer?.querySelector<HTMLElement>(".ContentBox");
+  if (contentBox && elem.parentElement !== contentBox) {
+    TransferElement(elem, contentBox);
   }
+  const targetElem: HTMLElement | null = elem;
 
   if (targetElem) {
     SetupTippy(targetElem);
@@ -567,14 +514,14 @@ function AppendViewControls(ReAppend: boolean = false) {
         }
         compactModeToggle.addEventListener("click", () => {
           // Use PageContainer instead of document.querySelector
-          const SpicyLyricsPage = PageContainer;
+          const BratLyricsPage = PageContainer;
           if (Fullscreen.IsOpen || Fullscreen.CinemaViewOpen) {
             if (IsCompactMode()) {
-              SpicyLyricsPage?.classList.remove("ForcedCompactMode");
+              BratLyricsPage?.classList.remove("ForcedCompactMode");
               DisableCompactMode();
               $forceCompactMode.set(false);
             } else {
-              SpicyLyricsPage?.classList.add("ForcedCompactMode");
+              BratLyricsPage?.classList.add("ForcedCompactMode");
               EnableCompactMode();
               $forceCompactMode.set(true);
             }
@@ -651,38 +598,11 @@ function AppendViewControls(ReAppend: boolean = false) {
             }`,
           });
         }
-        fullscreenBtn.addEventListener("click", async () => {
-          // If we're in cinema view, go to full fullscreen
-          if (Fullscreen.CinemaViewOpen) {
-            Fullscreen.CinemaViewOpen = false;
-            await EnterSpicyLyricsFullscreen();
-            PageView.AppendViewControls(true);
-          } else {
-            Fullscreen.CinemaViewOpen = true;
-            await ExitFullscreenElement();
-            PageView.AppendViewControls(true);
-          }
-          setTimeout(Compactify, 250);
+        fullscreenBtn.addEventListener("click", () => {
+          Fullscreen.Toggle(false);
         });
       } catch (err) {
         controlsLogger.warn("Failed to setup Fullscreen tooltip", err);
-      }
-    }
-
-    const cinemaViewBtn = elem.querySelector("#CinemaView");
-    if (cinemaViewBtn && !Fullscreen.IsOpen) {
-      try {
-        if (!isPip) {
-          Tooltips.CinemaView = Spicetify.Tippy(cinemaViewBtn, {
-            ...Spicetify.TippyProps,
-            content: `Cinema View`,
-          });
-        }
-        cinemaViewBtn.addEventListener("click", async () => {
-          Fullscreen.Open(true);
-        });
-      } catch (err) {
-        controlsLogger.warn("Failed to setup Cinema View tooltip", err);
       }
     }
 
@@ -710,7 +630,7 @@ function AppendViewControls(ReAppend: boolean = false) {
       try {
         Tooltips.Settings = Spicetify.Tippy(settingsButton, {
           ...Spicetify.TippyProps,
-          content: `Spicy Lyrics Settings`,
+          content: `brat lyrics Settings`,
         });
         settingsButton.addEventListener("click", () => {
           openSettingsPanel();

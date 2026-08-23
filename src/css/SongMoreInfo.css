@@ -1,4 +1,4 @@
-#SpicyLyricsPage .SongMoreInfo {
+#BratLyricsPage .SongMoreInfo {
   --bottom-offset: -52.5%;
   --border-radius: 8px;
   --inner-padding: 60px 30px 30px;
@@ -16,22 +16,22 @@
   transition: bottom 0.3s;
 }
 
-#SpicyLyricsPage:hover .SongMoreInfo {
+#BratLyricsPage:hover .SongMoreInfo {
   --bottom-offset: -45%;
 }
 
-#SpicyLyricsPage .SongMoreInfo:hover {
+#BratLyricsPage .SongMoreInfo:hover {
   --bottom-offset: 0;
 }
 
-#SpicyLyricsPage .SongMoreInfo .Content {
+#BratLyricsPage .SongMoreInfo .Content {
   width: 100cqw;
   display: flex;
   gap: 4cqw;
   flex-direction: row;
 }
 
-#SpicyLyricsPage .SongMoreInfo .Content .SongMetadata {
+#BratLyricsPage .SongMoreInfo .Content .SongMetadata {
   width: 30%;
   display: flex;
   flex-direction: column;
@@ -40,12 +40,12 @@
   height: 100cqh;
 }
 
-#SpicyLyricsPage .SongMoreInfo .Content .SongMetadata .SongArtwork:is(img) {
+#BratLyricsPage .SongMoreInfo .Content .SongMetadata .SongArtwork:is(img) {
   width: 100cqw;
   border-radius: 2cqw;
 }
 
-#SpicyLyricsPage .SongMoreInfo .Content .SongMetadata .SongMetadataTextContent {
+#BratLyricsPage .SongMoreInfo .Content .SongMetadata .SongMetadataTextContent {
   display: flex;
   flex-direction: column;
   gap: 0.45cqw;
@@ -55,7 +55,7 @@
   width: 100%;
 }
 
-#SpicyLyricsPage .SongMoreInfo .Content .SongMetadata .SongMetadataTextContent .SongName {
+#BratLyricsPage .SongMoreInfo .Content .SongMetadata .SongMetadataTextContent .SongName {
   font-size: 2rem;
   font-weight: 700;
   color: white;
@@ -84,7 +84,7 @@
   );
 }
 
-#SpicyLyricsPage .SongMoreInfo .Content .SongMetadata .SongMetadataTextContent .SongName span {
+#BratLyricsPage .SongMoreInfo .Content .SongMetadata .SongMetadataTextContent .SongName span {
   white-space: nowrap; /* Prevents text from wrapping */
   overflow: hidden; /* Hides overflowing text */
   display: inline-block; /* Ensures width is respected */
@@ -93,7 +93,7 @@
   padding: 0 1cqw;
 }
 
-#SpicyLyricsPage .SongMoreInfo .Content .SongMetadata .SongMetadataTextContent .ArtistsNames {
+#BratLyricsPage .SongMoreInfo .Content .SongMetadata .SongMetadataTextContent .ArtistsNames {
   font-size: 1.35rem;
   font-weight: 600;
   color: white;
@@ -120,7 +120,7 @@
   );
 }
 
-#SpicyLyricsPage .SongMoreInfo .Content .SongMetadata .SongMetadataTextContent .ArtistsNames span {
+#BratLyricsPage .SongMoreInfo .Content .SongMetadata .SongMetadataTextContent .ArtistsNames span {
   white-space: nowrap; /* Prevents text from wrapping */
   overflow: hidden; /* Hides overflowing text */
   display: inline-block; /* Ensures width is respected */
@@ -129,19 +129,19 @@
   padding: 0 1cqw;
 }
 
-#SpicyLyricsPage .SongMoreInfo .Content .SongAnnotation {
+#BratLyricsPage .SongMoreInfo .Content .SongAnnotation {
   width: 65%;
   height: 100cqh;
 }
 
-#SpicyLyricsPage .SongMoreInfo .Content .SongAnnotation .BackgroundVisualizer {
+#BratLyricsPage .SongMoreInfo .Content .SongAnnotation .BackgroundVisualizer {
   background-color: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(40px);
   height: 100cqh;
   border-radius: 1cqh;
 }
 
-#SpicyLyricsPage .SongMoreInfo .Content .SongAnnotation .BackgroundVisualizer .Annotation {
+#BratLyricsPage .SongMoreInfo .Content .SongAnnotation .BackgroundVisualizer .Annotation {
   overflow: hidden auto;
   height: 100cqh;
   width: 100%;

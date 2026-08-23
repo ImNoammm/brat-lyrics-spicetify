@@ -1,11 +1,10 @@
 // Global Types
 declare global {
   interface Window {
-    _spicy_lyrics_metadata?: any;
-    _spicy_lyrics?: any;
+    _brat_lyrics_metadata?: any;
+    _brat_lyrics?: any;
   }
-  declare const __SLdev__m: boolean;
+  declare const __BLdev__m: boolean;
 }
-
 
 export {};

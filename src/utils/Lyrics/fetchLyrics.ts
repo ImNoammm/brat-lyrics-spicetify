@@ -101,7 +101,6 @@ export default async function fetchLyrics(uri: string): Promise<[object | string
     LyricsContent.classList.add("HiddenTransitioned");
   }
 
-
   // Check if there's already data in localStorage
   const savedLyricsData = $currentLyricsData.get();
 
@@ -169,7 +168,6 @@ export default async function fetchLyrics(uri: string): Promise<[object | string
       return ["unknown-error", 0];
     }
   }
-
 
   if (!navigator.onLine) {
     $currentlyFetching.set(false);

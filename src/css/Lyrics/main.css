@@ -1,4 +1,4 @@
-#SpicyLyricsPage .LyricsContainer {
+#BratLyricsPage .LyricsContainer {
   height: 100%;
   display: flex;
   align-items: center;
@@ -9,7 +9,7 @@
   z-index: 4;
 }
 
-#SpicyLyricsPage .LyricsContainer.Hidden {
+#BratLyricsPage .LyricsContainer.Hidden {
   display: none;
 }
 
@@ -19,7 +19,7 @@
   initial-value: 0px;
 }
 
-#SpicyLyricsPage .LyricsContainer .LyricsContent {
+#BratLyricsPage .LyricsContainer .LyricsContent {
   --TextGlowDef: rgba(255, 255, 255, 0.15) 0px 0px 6px;
   --ActiveTextGlowDef: rgba(255, 255, 255, 0.4) 0px 0px 14px;
   --StrongTextGlowDef: rgba(255, 255, 255, 0.68) 0px 0px 16.4px;
@@ -56,20 +56,20 @@
   transition: opacity 0.25s, --SL-LyricsContent_MaskTopPadding 0.5s;
 }
 
-#SpicyLyricsPage:not(.Fullscreen):has(.ViewControls .ViewControl:hover) .LyricsContainer .LyricsContent {
+#BratLyricsPage:not(.Fullscreen):has(.ViewControls .ViewControl:hover) .LyricsContainer .LyricsContent {
   --SL-LyricsContent_MaskTopPadding: 32px;
 }
 
-.spicy-pip-wrapper #SpicyLyricsPage .LyricsContainer .LyricsContent:has(.LyricsNotice) {
+.spicy-pip-wrapper #BratLyricsPage .LyricsContainer .LyricsContent:has(.LyricsNotice) {
   -webkit-mask-image: none;
   mask-image: none;
 }
 
-#SpicyLyricsPage .LyricsContainer .LyricsContent:not(:has(.LyricsNotice)) * {
+#BratLyricsPage .LyricsContainer .LyricsContent:not(:has(.LyricsNotice)) * {
   font-weight: 700 !important;
 }
 
-.spicy-pip-wrapper #SpicyLyricsPage .LyricsContainer .LyricsContent {
+.spicy-pip-wrapper #BratLyricsPage .LyricsContainer .LyricsContent {
   /* Compact sizing tuned for the popup: comfortably readable at the default
      popup size (the floor dominates here, since the popup container is
      narrow), scales with width, and is capped so very wide popups don't end
@@ -77,15 +77,15 @@
   --DefaultLyricsSize: clamp(1.7rem, calc(1cqw * 5.5), 2.6rem);
 }
 
-/* #SpicyLyricsPage.Fullscreen.MinimalLyricsMode .LyricsContainer .LyricsContent {
+/* #BratLyricsPage.Fullscreen.MinimalLyricsMode .LyricsContainer .LyricsContent {
   --vertical-gap: 14cqh;
 } */
 
-#SpicyLyricsPage .LyricsContainer .LyricsContent.HiddenTransitioned {
+#BratLyricsPage .LyricsContainer .LyricsContent.HiddenTransitioned {
   opacity: 0;
 }
 
-#SpicyLyricsPage .LyricsContainer .LyricsContent .SpicyLyricsScrollContainer {
+#BratLyricsPage .LyricsContainer .LyricsContent .BratLyricsScrollContainer {
   width: 100%;
   box-sizing: border-box;
   transition:
@@ -97,12 +97,12 @@
   margin-top: 25cqh;
 }
 
-body:has(.Root:not(.global-nav)) #SpicyLyricsPage .LyricsContainer .LyricsContent .SpicyLyricsScrollContainer {
+body:has(.Root:not(.global-nav)) #BratLyricsPage .LyricsContainer .LyricsContent .BratLyricsScrollContainer {
   margin-top: 0cqh;
   padding-top: 25cqh;
 }
 
-#SpicyLyricsPage .LyricsContainer .LyricsContent .SpicyLyricsScrollContainer .VirtualLyricsContainer {
+#BratLyricsPage .LyricsContainer .LyricsContent .BratLyricsScrollContainer .VirtualLyricsContainer {
   position: relative;
   width: 100%;
   container-type: size;
@@ -112,32 +112,32 @@ body:has(.Root:not(.global-nav)) #SpicyLyricsPage .LyricsContainer .LyricsConten
 /* With position:absolute, CSS margins don't collapse between siblings.
    Clear them here — TanStack Virtual's gap option provides equivalent spacing.
    Specificity (1,6,0) beats Mixed.css rules at (1,5,0) that are loaded after this file. */
-#SpicyLyricsPage.SpicyRenderer .LyricsContainer .LyricsContent .SpicyLyricsScrollContainer .VirtualLyricsContainer .line {
+#BratLyricsPage.SpicyRenderer .LyricsContainer .LyricsContent .BratLyricsScrollContainer .VirtualLyricsContainer .line {
   margin: 0 !important;
 }
 
-#SpicyLyricsPage.Fullscreen.MinimalLyricsMode
+#BratLyricsPage.Fullscreen.MinimalLyricsMode
   .LyricsContainer
   .LyricsContent
-  .SpicyLyricsScrollContainer {
+  .BratLyricsScrollContainer {
   margin-top: 40cqh;
 }
 
-body:has(.Root:not(.global-nav)) #SpicyLyricsPage.Fullscreen.MinimalLyricsMode
+body:has(.Root:not(.global-nav)) #BratLyricsPage.Fullscreen.MinimalLyricsMode
   .LyricsContainer
   .LyricsContent
-  .SpicyLyricsScrollContainer {
+  .BratLyricsScrollContainer {
   margin-top: 0cqh;
   padding-top: 40cqh;
 }
 /* 
-#SpicyLyricsPage .LyricsContainer .LyricsContent .BottomSpacer {
+#BratLyricsPage .LyricsContainer .LyricsContent .BottomSpacer {
   display: block;
   height: 45vh;
   width: 100%;
 }
 
-#SpicyLyricsPage .LyricsContainer .LyricsContent .TopSpacer {
+#BratLyricsPage .LyricsContainer .LyricsContent .TopSpacer {
   display: block;
   height: 20vh;
   width: 100%;

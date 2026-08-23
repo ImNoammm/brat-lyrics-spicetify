@@ -54,7 +54,7 @@ const Session = {
   PushToHistory: (data: Location) => {
     sessionHistory.push(data);
   },
-  SpicyLyrics: {
+  BratLyrics: {
     ParseVersion: (version: string): VersionParsedData => {
       const versionMatches = version.match(/(\d+)\.(\d+)\.(\d+)/);
 
@@ -71,7 +71,7 @@ const Session = {
       };
     },
     GetCurrentVersion: (): VersionParsedData => {
-      return Session.SpicyLyrics.ParseVersion($spicyLyricsVersion.get());
+      return Session.BratLyrics.ParseVersion($spicyLyricsVersion.get());
     },
     GetLatestVersion: async (): Promise<VersionParsedData> => {
       const res = await Query([
@@ -82,11 +82,11 @@ const Session = {
       const versionJob = res.get("0");
       if (!versionJob || versionJob.httpStatus !== 200 || versionJob.format !== "text") return undefined;
       const data = versionJob.data;
-      return Session.SpicyLyrics.ParseVersion(data);
+      return Session.BratLyrics.ParseVersion(data);
     },
     IsOutdated: async (): Promise<boolean> => {
-      const latestVersion = await Session.SpicyLyrics.GetLatestVersion();
-      const currentVersion = Session.SpicyLyrics.GetCurrentVersion();
+      const latestVersion = await Session.BratLyrics.GetLatestVersion();
+      const currentVersion = Session.BratLyrics.GetCurrentVersion();
 
       if (latestVersion === undefined || currentVersion === undefined) return false;
 

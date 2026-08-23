@@ -8,8 +8,8 @@ export default defineConfig({
   linter: "oxlint",
   template: "extension",
   packageManager: "bun",
-  cssId: "slstyles",
-  devModeVarName: "__SLdev__m",
+  cssId: "blstyles",
+  devModeVarName: "__BLdev__m",
   esbuildOptions: {
     legalComments: "inline",
   },

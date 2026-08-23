@@ -5,9 +5,7 @@ import { ClearScrollSimplebar } from "../../Scrolling/Simplebar/ScrollSimplebar.
 import { setBlurringLastLine } from "../Animator/Lyrics/LyricsAnimator.ts";
 import { DestroyAllLyricsContainers } from "../Applyer/CreateLyricsContainer.ts";
 import { EmitApply, EmitNotApplyed } from "../Applyer/OnApply.ts";
-import { ApplyStaticLyrics, type StaticLyricsData } from "../Applyer/Static.ts";
-import { ApplyLineLyrics } from "../Applyer/Synced/Line.ts";
-import { ApplySyllableLyrics } from "../Applyer/Synced/Syllable.ts";
+import { ApplyBratLyrics, DestroyBratLyrics } from "../Applyer/Brat/BratLyrics.ts";
 import { ClearLyricsPageContainer, ShowQueueLoader } from "../fetchLyrics.ts";
 import { ClearLyricsContentArrays, isRomanized } from "../lyrics.ts";
 import { PageContainer } from "../../../components/Pages/PageView.ts";
@@ -23,7 +21,6 @@ export type LyricsData = {
   Type: "Syllable" | "Line" | "Static" | string;
   [key: string]: any;
 };
-
 
 let currentAbortController: AbortController | null = null;
 
@@ -48,6 +45,7 @@ export default async function ApplyLyrics(lyricsContent: [object | string, numbe
   EmitNotApplyed();
 
   DestroyAllLyricsContainers();
+  DestroyBratLyrics();
 
   ClearLyricsContentArrays();
   ClearScrollSimplebar();
@@ -142,16 +140,7 @@ export default async function ApplyLyrics(lyricsContent: [object | string, numbe
 
     currentNoticeElement.innerHTML = `
       <p class="notice-descriptor">${noticeContent.trim()}</p>
-      <p class="notice-footer">Need more help? Join our <a>Discord</a>.</p>
     `;
-
-    // Add click handler to log when the Discord link is clicked
-    const discordLink = currentNoticeElement.querySelector("a");
-    if (discordLink) {
-      discordLink.addEventListener("click", () => {
-        window.open("https://discord.com/invite/uqgXU5wh8j", "_blank");
-      }, { signal: currentAbortController.signal });
-    }
 
     EmitApply("None", null)
     return;
@@ -161,12 +150,5 @@ export default async function ApplyLyrics(lyricsContent: [object | string, numbe
 
   const romanize = isRomanized;
 
-  if (lyrics.Type === "Syllable") {
-    ApplySyllableLyrics(lyrics as any, romanize);
-  } else if (lyrics.Type === "Line") {
-    ApplyLineLyrics(lyrics as any, romanize);
-  } else if (lyrics.Type === "Static") {
-    // Type assertion to StaticLyricsData since we've verified the Type is "Static"
-    ApplyStaticLyrics(lyrics as StaticLyricsData, romanize);
-  }
+  ApplyBratLyrics(lyrics, romanize);
 }

@@ -1,19 +1,17 @@
 import { useState } from "react";
-import AppearanceSection from "./AppearanceSection.tsx";
 import BackgroundSection from "./BackgroundSection.tsx";
+import BratSection from "./BratSection.tsx";
 import CacheSection from "./CacheSection.tsx";
 import DeveloperSection from "./DeveloperSection.tsx";
 import ExperimentsSection from "./ExperimentsSection.tsx";
 import InterfaceSection from "./InterfaceSection.tsx";
-import LyricsSection from "./LyricsSection.tsx";
 import PlaybackSection from "./PlaybackSection.tsx";
 import { FilterDropdown, SearchBar } from "./components.tsx";
 
 const SECTIONS = [
+  "brat",
   "Background",
-  "Lyrics Display",
   "Playback",
-  "Appearance",
   "Interface",
   "Experiments",
   "Developer",
@@ -31,10 +29,9 @@ export default function SettingsPanel({ onOpenExperiments }: { onOpenExperiments
         <FilterDropdown sections={SECTIONS} value={sectionFilter} onChange={setSectionFilter} />
       </div>
 
+      <BratSection query={query} sectionFilter={sectionFilter} />
       <BackgroundSection query={query} sectionFilter={sectionFilter} />
-      <LyricsSection query={query} sectionFilter={sectionFilter} />
       <PlaybackSection query={query} sectionFilter={sectionFilter} />
-      <AppearanceSection query={query} sectionFilter={sectionFilter} />
       <InterfaceSection query={query} sectionFilter={sectionFilter} />
       <ExperimentsSection
         query={query}

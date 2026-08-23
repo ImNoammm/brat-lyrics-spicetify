@@ -1,0 +1,144 @@
+.LyricsContainer .LyricsContent.BratMode {
+  position: relative;
+  background: var(--brat-bg, #fff);
+  display: block;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  mask-image: none;
+  -webkit-mask-image: none;
+}
+
+.LyricsContainer .LyricsContent.BratMode .BratStage {
+  position: absolute;
+  inset: 0;
+  filter: blur(var(--brat-blur, 4px));
+  transform: translateZ(0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: var(--brat-bg, #fff);
+}
+
+#BratLyricsPage .LyricsContainer .LyricsContent.BratMode .BratText {
+  color: var(--brat-fg, #000);
+  font-family: "BratNarrow", "Arial Narrow", "Liberation Sans Narrow", Arial,
+    Helvetica, sans-serif !important;
+  font-weight: 500 !important;
+  font-style: normal;
+  line-height: 1 !important;
+  letter-spacing: 0 !important;
+  text-align: justify;
+  text-align-last: justify;
+  -moz-text-align-last: justify;
+  hyphens: none;
+  text-transform: lowercase;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: geometricPrecision;
+}
+
+#BratLyricsPage .ContentBox {
+  position: relative;
+  padding: 0;
+  gap: 0;
+}
+
+#BratLyricsPage .ContentBox .NowBar {
+  display: none !important;
+}
+
+#BratLyricsPage:has(.LyricsContent.BratMode) {
+  background: var(--brat-bg, #fff) !important;
+}
+
+#BratLyricsPage:has(.LyricsContent.BratMode) .spicy-dynamic-bg,
+#BratLyricsPage:has(.LyricsContent.BratMode) canvas.spicy-dynamic-bg {
+  display: none !important;
+}
+
+#BratLyricsPage:has(.LyricsContent.BratMode) .ContentBox,
+#BratLyricsPage:has(.LyricsContent.BratMode) .ContentBox .LyricsContainer {
+  background: transparent !important;
+  mask-image: none !important;
+  -webkit-mask-image: none !important;
+}
+
+#BratLyricsPage .ContentBox .ViewControls {
+  position: absolute;
+  inset: 18px 22px auto auto;
+  width: auto;
+  height: auto;
+  padding: 0;
+  margin: 0;
+  display: flex !important;
+  gap: 8px;
+  justify-content: flex-end;
+  transform: none;
+  opacity: 1 !important;
+  z-index: 10;
+}
+
+#BratLyricsPage .ContentBox .ViewControls .ViewControl {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.3);
+  color: #fff;
+  opacity: 1;
+  cursor: pointer;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  transition: background 0.15s ease;
+}
+
+#BratLyricsPage .ContentBox .ViewControls .ViewControl:hover {
+  background: rgba(0, 0, 0, 0.45);
+}
+
+#BratLyricsPage .ContentBox .ViewControls .ViewControl svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+
+#BratLyricsPage .ContentBox .LyricsContainer {
+  flex: 1 1 100% !important;
+  width: 100% !important;
+  max-width: none !important;
+  height: 100% !important;
+  max-height: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+#BratLyricsPage .ContentBox .LyricsContainer .LyricsContent.BratMode {
+  height: 100% !important;
+  max-height: none !important;
+}
+
+#BratLyricsPage.Fullscreen .ContentBox .ViewControls > .ViewControl {
+  display: none !important;
+}
+
+#BratLyricsPage.Fullscreen .ContentBox .ViewControls > #FullscreenToggle,
+#BratLyricsPage.Fullscreen .ContentBox .ViewControls > #SettingsToggle,
+#BratLyricsPage.Fullscreen .ContentBox .ViewControls > #LyricsManager {
+  display: flex !important;
+}
+
+#BratLyricsPage.Fullscreen .ContentBox .ViewControls {
+  transition: opacity 0.25s ease;
+}
+
+#BratLyricsPage.Fullscreen:not(.ControlsVisible) .ContentBox .ViewControls {
+  opacity: 0 !important;
+  pointer-events: none;
+}

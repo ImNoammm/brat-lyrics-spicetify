@@ -8,6 +8,7 @@ import "./css/ContentBox.css";
 import "./css/DynamicBG/spicy-dynamic-bg.css";
 import "./css/Lyrics/main.css";
 import "./css/Lyrics/Mixed.css";
+import "./css/Lyrics/Brat.css";
 import "./css/Loaders/LoaderContainer.css";
 import "./css/font-pack/font-pack.css";
 
@@ -22,6 +23,7 @@ import {
   $spicyLyricsVersion,
   $staticBackgroundMode,
   $developerMode,
+  SETTINGS_KEY,
 } from "./utils/stores.ts";
 import Global from "./components/Global/Global.ts";
 import Platform from "./components/Global/Platform.ts";
@@ -30,7 +32,7 @@ import { SpotifyPlayer } from "./components/Global/SpotifyPlayer.ts";
 import PageView, { GetPageRoot, PageContainer } from "./components/Pages/PageView.ts";
 import LoadFonts, { ApplyFontPixel } from "./components/Styling/Fonts.ts";
 import { Icons } from "./components/Styling/Icons.ts";
-import Fullscreen, { EnterSpicyLyricsFullscreen, ExitFullscreenElement } from "./components/Utils/Fullscreen.ts";
+import Fullscreen, { EnterBratLyricsFullscreen, ExitFullscreenElement } from "./components/Utils/Fullscreen.ts";
 import { UpdateNowBar } from "./components/Utils/NowBar.ts";
 import { IsPlaying } from "./utils/Addons.ts";
 import { requestPositionSync } from "./utils/Gets/GetProgress.ts";
@@ -40,15 +42,12 @@ import ApplyLyrics from "./utils/Lyrics/Global/Applyer.ts";
 import { ScrollingIntervalTime } from "./utils/Lyrics/lyrics.ts";
 import { ScrollToActiveLine } from "./utils/Scrolling/ScrollToActiveLine.ts";
 import { ScrollSimplebar } from "./utils/Scrolling/Simplebar/ScrollSimplebar.ts";
-import { $fromVersion, $lastFetchedUri, $previousVersion } from "./utils/uiState.ts";
-import { CheckForUpdates } from "./utils/version/CheckForUpdates.tsx";
-import { needsMigration, showMigrationModal } from "./utils/migration/DataMigration.tsx";
+import { $fromVersion, $lastFetchedUri, $previousVersion, UI_STATE_KEY } from "./utils/uiState.ts";
 import "./css/settings-panel.css";
 import "./components/ReactComponents/LyricsManager/styles.css";
 import "./css/polyfills/generic-modal-polyfill.css";
 import "./css/polyfills/sonner-polyfill.css";
 import "./css/NPVLyrics.css";
-import UpdateDialog from "./components/ReactComponents/UpdateDialog.tsx";
 import { IsPIP, OpenPopupLyrics, ClosePopupLyrics } from "./components/Utils/PopupLyrics.ts";
 import { GetNPVCardElement, initNPVLyrics } from "./components/Utils/NPVLyrics.ts";
 import ReactDOM from "react-dom/client";
@@ -63,6 +62,8 @@ import Whentil from "./modules/Whentil.ts";
 import App from "./utils/app.ts";
 import { initSession } from "./utils/SessionManager/index.ts";
 
+const BRAT_PLAYBAR_ICON = `<svg role="img" height="16" width="16" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" data-encore-id="icon" class="Svg-sc-ytk21e-0 Svg-img-16-icon"><path d="M1 2h14v2.2H1zM1 6.9h14v2.2H1zM1 11.8h8.6V14H1z"/></svg>`;
+
 async function main() {
   const appLogger = new Logger("App");
   const dynamicBgLogger = new Logger("Dynamic Background");
@@ -76,9 +77,11 @@ async function main() {
 
   await Platform.OnSpotifyReady;
 
-  if (needsMigration()) {
-    showMigrationModal();
-    return;
+  if (Spicetify.LocalStorage.get(SETTINGS_KEY) === null) {
+    Spicetify.LocalStorage.set(SETTINGS_KEY, JSON.stringify({}));
+  }
+  if (Spicetify.LocalStorage.get(UI_STATE_KEY) === null) {
+    Spicetify.LocalStorage.set(UI_STATE_KEY, JSON.stringify({}));
   }
 
   Global.SetScope("fullscreen.open", false);
@@ -104,8 +107,8 @@ async function main() {
     $previousVersion.set("");
   }
 
-  $spicyLyricsVersion.set(window._spicy_lyrics_metadata?.LoadedVersion ?? $spicyLyricsVersion.get());
-  window._spicy_lyrics_metadata = {};
+  $spicyLyricsVersion.set(window._brat_lyrics_metadata?.LoadedVersion ?? $spicyLyricsVersion.get());
+  window._brat_lyrics_metadata = {};
 
   void initSession();
 
@@ -115,7 +118,6 @@ async function main() {
   const skeletonStyle = document.createElement("style");
   skeletonStyle.innerHTML = `
         /* This style is here to prevent the @keyframes removal in the CSS. I still don't know why that's happening. */
-        /* This is a part of Spicy Lyrics */
         @keyframes skeleton {
             to {
                 background-position-x: 0;
@@ -249,29 +251,26 @@ async function main() {
       {
         Registered: false,
         Button: new SpotifyPlayer.Playbar.Button(
-          "Spicy Lyrics",
-          Icons.LyricsPage,
+          "brat lyrics",
+          BRAT_PLAYBAR_ICON,
           (self) => {
-            if (!self.active) {
-              /* const isNewFullscreen = document.querySelector<HTMLElement>(".QdB2YtfEq0ks5O4QbtwX .WRGTOibB8qNEkgPNtMxq");
-                if (isNewFullscreen) {
-                  PageView.Open();
-                  self.active = true;
-                } else  */
-              Session.Navigate({ pathname: "/SpicyLyrics" });
-              if (Global.Saves.shift_key_pressed) {
-                const pageWhentil = Whentil.When(
-                  () => document.querySelector<HTMLElement>(".Root__main-view #SpicyLyricsPage"),
-                  () => {
-                    Fullscreen.Open(true);
-                    pageWhentil?.Cancel();
-                  }
-                );
-              }
-              //}
-            } else {
+            const onLyricsPage =
+              Spicetify.Platform?.History?.location?.pathname === "/BratLyrics";
+            if (onLyricsPage) {
+              self.active = false;
               Session.GoBack();
-              //}
+              return;
+            }
+            self.active = true;
+            Session.Navigate({ pathname: "/BratLyrics" });
+            if (Global.Saves.shift_key_pressed) {
+              const pageWhentil = Whentil.When(
+                () => document.querySelector<HTMLElement>(".Root__main-view #BratLyricsPage"),
+                () => {
+                  Fullscreen.Open(false); // real fullscreen; cinema view is gone
+                  pageWhentil?.Cancel();
+                }
+              );
             }
           },
           false,
@@ -285,9 +284,9 @@ async function main() {
           `<svg role="img" height="16" width="16" aria-hidden="true" viewBox="0 0 16 16" data-encore-id="icon" class="Svg-sc-ytk21e-0 Svg-img-16-icon"><path d="M6.064 10.229l-2.418 2.418L2 11v4h4l-1.647-1.646 2.418-2.418-.707-.707zM11 2l1.647 1.647-2.418 2.418.707.707 2.418-2.418L15 6V2h-4z"/></svg>`,
           async (self) => {
             if (!self.active) {
-              Session.Navigate({ pathname: "/SpicyLyrics" });
+              Session.Navigate({ pathname: "/BratLyrics" });
               const pageWhentil = Whentil.When(
-                () => document.querySelector<HTMLElement>(".Root__main-view #SpicyLyricsPage"),
+                () => document.querySelector<HTMLElement>(".Root__main-view #BratLyricsPage"),
                 () => {
                   Fullscreen.Open(Global.Saves.shift_key_pressed ?? false);
                   pageWhentil?.Cancel();
@@ -306,7 +305,7 @@ async function main() {
         Button: (
           (('documentPictureInPicture' in window) && ($popupLyricsAllowed.get()))
             ? new SpotifyPlayer.Playbar.Button(
-              "Spicy Popup Lyrics",
+              "brat Popup Lyrics",
               Icons.PiPMode,
               () => {
                 if (IsPIP) {
@@ -358,12 +357,12 @@ async function main() {
 
     const fullscreenButton = ButtonList[1].Button;
     fullscreenButton.element.style.order = "100001";
-    fullscreenButton.element.id = "SpicyLyrics_FullscreenButton";
+    fullscreenButton.element.id = "BratLyrics_FullscreenButton";
 
     const popupLyricsButton = ButtonList[2].Button;
     if (popupLyricsButton && ('documentPictureInPicture' in window) && $popupLyricsAllowed.get()) {
       popupLyricsButton.element.style.order = "100000";
-      popupLyricsButton.element.id = "SpicyLyrics_PopupLyricsButton";
+      popupLyricsButton.element.id = "BratLyrics_PopupLyricsButton";
     }
 
     const hideUnwantedButtons = (container: Element) => {
@@ -379,8 +378,8 @@ async function main() {
 
         if (
           (isFullscreen || isPip || isGenericControl) &&
-          element.id !== "SpicyLyrics_FullscreenButton" &&
-          element.id !== "SpicyLyrics_PopupLyricsButton"
+          element.id !== "BratLyrics_FullscreenButton" &&
+          element.id !== "BratLyrics_PopupLyricsButton"
         ) {
           (element as HTMLElement).style.display = "none";
         }
@@ -460,24 +459,6 @@ async function main() {
         requestPositionSync();
       }
     );
-
-    const fromVersion = $fromVersion.get();
-    if (fromVersion !== $spicyLyricsVersion.get()) {
-      const div = document.createElement("div");
-      const reactRoot = ReactDOM.createRoot(div);
-      reactRoot.render(
-        <UpdateDialog fromVersion={fromVersion} spicyLyricsVersion={$spicyLyricsVersion.get()} />
-      );
-
-      PopupModal.display({
-        title: "Spicy Lyrics",
-        content: div,
-        isLarge: true,
-        onClose: () => {
-          reactRoot.unmount();
-        }
-      });
-    }
 
     $fromVersion.set($spicyLyricsVersion.get());
 
@@ -787,11 +768,11 @@ async function main() {
 
     async function loadPage(location: Location) {
       appLogger.debug("Handling route change", location.pathname);
-      if (location.pathname === "/SpicyLyrics") {
+      if (location.pathname === "/BratLyrics") {
         PageView.Open();
         if (button) button.Button.active = true;
       } else {
-        if (lastLocation?.pathname === "/SpicyLyrics") {
+        if (lastLocation?.pathname === "/BratLyrics") {
           await PageView.Destroy();
           if (!button) return;
           button.Button.active = false;
@@ -802,7 +783,7 @@ async function main() {
 
     Global.Event.listen("platform:history", loadPage);
 
-    if (Spicetify.Platform.History.location.pathname === "/SpicyLyrics") {
+    if (Spicetify.Platform.History.location.pathname === "/BratLyrics") {
       Global.Event.listen("pagecontainer:available", () => {
         loadPage(Spicetify.Platform.History.location);
         if (!button) return;
@@ -811,7 +792,7 @@ async function main() {
     }
 
     if (button) {
-      button.Button.tippy.setContent("Spicy Lyrics");
+      button.Button.tippy.setContent("brat lyrics");
     }
 
     /*
@@ -820,7 +801,7 @@ async function main() {
     let wasPageViewTippyShown = false;
     button.Button.tippy.setProps({
       ...Spicetify.TippyProps,
-      content: `Spicy Lyrics`,
+      content: `brat lyrics`,
       allowHTML: true,
       onShow(instance: any) {
         // Spotify's Code
@@ -851,7 +832,7 @@ async function main() {
             TippyElementContent.style.borderRadius = "";
 
             TippyElementContent.innerHTML = ""
-            instance.setContent("Spicy Lyrics");
+            instance.setContent("brat lyrics");
 
             return;
           };
@@ -942,7 +923,7 @@ async function main() {
               }
             );
           } catch (err) {
-            console.error("Spicy Lyrics: couldn't listen for volume changes", err);
+            console.error("brat lyrics: couldn't listen for volume changes", err);
           }
         }
       );
@@ -1023,19 +1004,14 @@ async function main() {
       Session.RecordNavigation(Spicetify.Platform.History.location);
 
       Global.Event.listen("session:navigation", (data: Location) => {
-        if (data.pathname === "/SpicyLyrics/Update") {
+        if (data.pathname === "/BratLyrics/Update") {
           $fromVersion.set($spicyLyricsVersion.get());
-          window._spicy_lyrics_metadata = {};
+          window._brat_lyrics_metadata = {};
           Session.GoBack();
           window.location.reload();
         }
       });
 
-      const CheckForUpdates_Intervaled = async () => {
-        await CheckForUpdates();
-        setTimeout(CheckForUpdates_Intervaled, 300 * 1000);
-      };
-      setTimeout(async () => await CheckForUpdates_Intervaled(), 1000);
     }
   };
 
@@ -1064,7 +1040,15 @@ async function main() {
 
   runThemeMatcher();
 
-  Spicetify.Keyboard.registerImportantShortcut(Spicetify.Keyboard.KEYS.ESCAPE, async () => {
+  const registerShortcut = (key: any, handler: () => void | Promise<void>) => {
+    try {
+      (Spicetify as any).Keyboard?.registerImportantShortcut?.(key, handler);
+    } catch (e) {
+      appLogger.warn("Keyboard shortcut unavailable on this client", e);
+    }
+  };
+
+  registerShortcut((Spicetify as any).Keyboard?.KEYS?.ESCAPE, async () => {
     if (IsPIP) return;
     if (Fullscreen.CinemaViewOpen) {
       await Fullscreen.Close();
@@ -1080,7 +1064,7 @@ async function main() {
     }
   });
 
-  Spicetify.Keyboard.registerImportantShortcut(Spicetify.Keyboard.KEYS.F11, async () => {
+  registerShortcut((Spicetify as any).Keyboard?.KEYS?.F11, async () => {
     if (IsPIP) return;
     if (Fullscreen.IsOpen) {
       if (!Fullscreen.CinemaViewOpen) {
@@ -1089,14 +1073,14 @@ async function main() {
         PageView.AppendViewControls(true);
       } else {
         Fullscreen.CinemaViewOpen = false;
-        await EnterSpicyLyricsFullscreen();
+        await EnterBratLyricsFullscreen();
         PageView.AppendViewControls(true);
       }
     }
   });
 
   new Spicetify.Menu.Item(
-		"Spicy Lyrics Settings",
+		"brat lyrics Settings",
 		false,
 		() => {
 			openSettingsPanel();
