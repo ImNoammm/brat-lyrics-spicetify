@@ -1,5 +1,7 @@
 # brat lyrics
 
+<img width="1794" height="839" alt="image" src="https://github.com/user-attachments/assets/0d421164-7107-4b00-9b2d-6991033dc789" />
+
 Spotify lyrics that look like the cover of Charli xcx's *brat* — lowercase Arial Narrow, justified edge to edge, slightly out of focus, one line building up word by word.
 
 I forked [Spicy Lyrics](https://github.com/spikerko/spicy-lyrics) and swapped out the renderer. Everything else is still Spicy's: the fetching, the word-level timing, the sidebar card, fullscreen, PiP.
