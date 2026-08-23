@@ -1,5 +1,5 @@
 /* ── Settings Panel — reads chrome tokens from the modal scope ────── */
-sl-generic-modal.SpicyLyricsModal .sl-modal-overlay {
+sl-generic-modal.BratLyricsModal .sl-modal-overlay {
   /* Toolbar: search + filter */
   .sl-sp-toolbar {
     display: flex;
@@ -925,3 +925,15 @@ sl-generic-modal.SpicyLyricsModal .sl-modal-overlay {
     }
   }
 }
+
+.sl-color-input {
+  width: 44px;
+  height: 28px;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 6px;
+  background: transparent;
+  cursor: pointer;
+}
+.sl-color-input::-webkit-color-swatch-wrapper { padding: 2px; }
+.sl-color-input::-webkit-color-swatch { border: 0; border-radius: 4px; }

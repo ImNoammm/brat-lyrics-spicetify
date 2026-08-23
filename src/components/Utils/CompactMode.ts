@@ -10,21 +10,21 @@ import { IsPIP } from "./PopupLyrics.ts";
 let CompactMode = false;
 
 export const EnableCompactMode = () => {
-  const SpicyLyricsPage = PageContainer;
-  if (!SpicyLyricsPage) return;
+  const BratLyricsPage = PageContainer;
+  if (!BratLyricsPage) return;
 
   const isNoLyrics =
     $currentLyricsData.get() === `NO_LYRICS:${SpotifyPlayer.GetUri()}`;
   if (isNoLyrics && (Fullscreen.IsOpen || Fullscreen.CinemaViewOpen || IsPIP)) {
-    SpicyLyricsPage.querySelector<HTMLElement>(".ContentBox .LyricsContainer")?.classList.remove(
+    BratLyricsPage.querySelector<HTMLElement>(".ContentBox .LyricsContainer")?.classList.remove(
       "Hidden"
     );
-    SpicyLyricsPage.querySelector<HTMLElement>(".ContentBox")?.classList.remove("LyricsHidden");
+    BratLyricsPage.querySelector<HTMLElement>(".ContentBox")?.classList.remove("LyricsHidden");
   }
 
-  SpicyLyricsPage.classList.add("CompactMode", "NowBarSide__Left");
-  SpicyLyricsPage.classList.remove("NowBarSide__Right");
-  const NowBar = SpicyLyricsPage.querySelector<HTMLElement>(".ContentBox .NowBar");
+  BratLyricsPage.classList.add("CompactMode", "NowBarSide__Left");
+  BratLyricsPage.classList.remove("NowBarSide__Right");
+  const NowBar = BratLyricsPage.querySelector<HTMLElement>(".ContentBox .NowBar");
   if (!NowBar) return;
   NowBar.classList.add("LeftSide");
   NowBar.classList.remove("RightSide");
@@ -43,19 +43,19 @@ export const EnableCompactMode = () => {
 };
 
 export const DisableCompactMode = () => {
-  const SpicyLyricsPage = PageContainer;
-  if (!SpicyLyricsPage) return;
+  const BratLyricsPage = PageContainer;
+  if (!BratLyricsPage) return;
 
   const isNoLyrics =
     $currentLyricsData.get() === `NO_LYRICS:${SpotifyPlayer.GetUri()}`;
   if (isNoLyrics && (Fullscreen.IsOpen || Fullscreen.CinemaViewOpen || IsPIP)) {
-    SpicyLyricsPage.querySelector<HTMLElement>(".ContentBox .LyricsContainer")?.classList.add(
+    BratLyricsPage.querySelector<HTMLElement>(".ContentBox .LyricsContainer")?.classList.add(
       "Hidden"
     );
-    SpicyLyricsPage.querySelector<HTMLElement>(".ContentBox")?.classList.add("LyricsHidden");
+    BratLyricsPage.querySelector<HTMLElement>(".ContentBox")?.classList.add("LyricsHidden");
   }
 
-  SpicyLyricsPage.classList.remove("CompactMode");
+  BratLyricsPage.classList.remove("CompactMode");
   Session_NowBar_SetSide();
   CompactMode = false;
   GetCurrentLyricsContainerInstance()?.Resize();
@@ -74,10 +74,10 @@ export const ToggleCompactMode = () => {
 
 $lockedMediaBox.listen((v) => {
   if (!CompactMode) return;
-  const SpicyLyricsPage = PageContainer;
-  if (!SpicyLyricsPage) return;
+  const BratLyricsPage = PageContainer;
+  if (!BratLyricsPage) return;
   if (IsPIP) return;
-  const NowBar = SpicyLyricsPage.querySelector<HTMLElement>(".ContentBox .NowBar");
+  const NowBar = BratLyricsPage.querySelector<HTMLElement>(".ContentBox .NowBar");
   if (!NowBar) return;
   if (v) {
     NowBar.classList.add("LockedMediaBox");

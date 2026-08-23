@@ -1,7 +1,7 @@
 import { DeepFreeze } from "../../utils/Addons.ts";
 
 const Fonts = DeepFreeze({
-  Lyrics: () => LoadFont("https://fonts.spikerko.org/spicy-lyrics/source.css"),
+  Lyrics: () => LoadFont("https://fonts.spikerko.org/bratlyrics/source.css"),
   Vazirmatn: () => LoadFont("https://fonts.spikerko.org/Vazirmatn/source.css"),
   NotoSansGeorgian: () => LoadFont("https://fonts.spikerko.org/NotoSansGeorgian/source.css"),
 });
@@ -53,7 +53,7 @@ export const ApplyFontPixel = (): HTMLSpanElement | undefined => {
   };
   const inlineStyles = GetInlineStyles(styleProperties);
   fontPixel.style.cssText = inlineStyles;
-  fontPixel.classList.add("SpicyLyricsFontPixel");
+  fontPixel.classList.add("BratLyricsFontPixel");
   const fontPixelString = `Aაا"1١`;
   fontPixel.innerHTML = `
 <span style="font-weight: 900; ${inlineStyles}">${fontPixelString}</span>

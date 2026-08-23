@@ -10,6 +10,7 @@ import TransferElement from "./TransferElement.ts";
 import { IsPIP } from "./PopupLyrics.ts";
 import { Spring } from "../../modules/Spring.ts";
 import { Maid } from "../../modules/Maid.ts";
+import { DisableControlsAutoHide, EnableControlsAutoHide } from "./ControlsAutoHide.ts";
 import Scheduler from "../../modules/Scheduler.ts";
 
 const Fullscreen = {
@@ -174,7 +175,7 @@ export const ExitFullscreenElement = async () => {
   setTimeout(Compactify, 1000);
 };
 
-export const EnterSpicyLyricsFullscreen = async () => {
+export const EnterBratLyricsFullscreen = async () => {
   const mainElement = document.querySelector<HTMLElement>("#main");
   if (mainElement) {
     mainElement.style.display = "none";
@@ -195,6 +196,7 @@ export const EnterSpicyLyricsFullscreen = async () => {
 };
 
 function CleanupMediaBox() {
+  DisableControlsAutoHide();
   EventAbortController?.abort();
   EventAbortController = undefined;
 
@@ -249,7 +251,7 @@ function Open(skipDocumentFullscreen: boolean = false, moveElement: boolean = tr
     const handleFullscreen = async () => {
       try {
         if (!skipDocumentFullscreen) {
-          await EnterSpicyLyricsFullscreen();
+          await EnterBratLyricsFullscreen();
         }
         setTimeout(() => PageView.AppendViewControls(true), 50);
       } catch (err: unknown) {
@@ -284,6 +286,8 @@ function Open(skipDocumentFullscreen: boolean = false, moveElement: boolean = tr
         SpicyPage.addEventListener("mouseleave", Page_MouseOut, { signal });
       }
     }
+
+    EnableControlsAutoHide(SpicyPage);
 
     Global.Event.evoke("fullscreen:open", null);
   }

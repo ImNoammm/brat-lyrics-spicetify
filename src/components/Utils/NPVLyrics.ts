@@ -98,7 +98,7 @@ function desiredState(): CardState {
     IsPIPOpening ||
     Fullscreen.IsOpen ||
     Fullscreen.CinemaViewOpen ||
-    Spicetify.Platform.History.location.pathname === "/SpicyLyrics";
+    Spicetify.Platform.History.location.pathname === "/BratLyrics";
   if (pageBusyElsewhere) return "DORMANT";
   if (hiddenForMissingLyrics()) return "DORMANT";
   return $npvLyricsOpen.get() ? "ACTIVE" : "SHELL";
@@ -252,7 +252,7 @@ function refreshCardUI(): void {
 
 function renderCardShell(npv: HTMLElement): boolean {
   const el = document.createElement("div");
-  el.id = "SpicyLyricsNPVCard";
+  el.id = "BratLyricsNPVCard";
   el.innerHTML = `
         <div class="CardHeader">
             <span class="CardTitle">Lyrics</span>
@@ -274,9 +274,9 @@ function renderCardShell(npv: HTMLElement): boolean {
   if (expand) {
     expand.addEventListener("click", () => {
       // The card guard inside PageView.Open hands the pipeline over.
-      Session.Navigate({ pathname: "/SpicyLyrics" });
+      Session.Navigate({ pathname: "/BratLyrics" });
     });
-    setTooltip(expand, "Open Spicy Lyrics", "expand-tip");
+    setTooltip(expand, "Open brat lyrics", "expand-tip");
   }
 
   const maximize = cardEl.querySelector<HTMLElement>("#NPVCardMaximize");

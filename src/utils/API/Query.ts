@@ -8,6 +8,7 @@ import {
   SettleFailure,
   SettleSuccess,
 } from "./CircuitBreaker.ts";
+import { ApiClientVersion } from "../../../project/config.ts";
 
 export type Query = {
   operation: string;
@@ -95,7 +96,7 @@ export async function Query(
   options: QueryOptions = {}
 ): Promise<QueryResultGetter> {
   const host = Defaults.lyrics.api.url;
-  const clientVersion = Session.SpicyLyrics.GetCurrentVersion();
+  const clientVersion = Session.BratLyrics.ParseVersion(ApiClientVersion);
 
   // Throws ServiceUnavailableError rather than touching the network when the
   // breaker is open. Doing this before `fetch` also spares the CORS preflight,

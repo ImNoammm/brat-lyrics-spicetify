@@ -1,6 +1,6 @@
 import { atom } from "nanostores";
 
-export const UI_STATE_KEY = "SL:uiState";
+export const UI_STATE_KEY = "BL:uiState";
 
 function readUiStateBlob(): Record<string, any> {
   const raw = Spicetify.LocalStorage.get(UI_STATE_KEY);

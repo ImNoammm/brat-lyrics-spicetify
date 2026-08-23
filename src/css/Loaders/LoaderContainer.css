@@ -1,4 +1,4 @@
-#SpicyLyricsPage .LyricsContainer .loaderContainer {
+#BratLyricsPage .LyricsContainer .loaderContainer {
   position: absolute;
   display: flex;
   justify-content: center;
@@ -14,24 +14,24 @@
   transition: opacity 0.4s ease-in-out;
 }
 
-#SpicyLyricsPage .LyricsContainer .loaderContainer.active {
+#BratLyricsPage .LyricsContainer .loaderContainer.active {
   position: relative;
   opacity: 1;
   z-index: 9;
 }
 
-#SpicyLyricsPage .LyricsContainer .loaderContainer:is(.active) + .LyricsContent {
+#BratLyricsPage .LyricsContainer .loaderContainer:is(.active) + .LyricsContent {
   display: none;
 }
 
 /* Queued state (HTTP 503): stack the spinner above an explanatory message. */
-#SpicyLyricsPage .LyricsContainer .loaderContainer.queued {
+#BratLyricsPage .LyricsContainer .loaderContainer.queued {
   flex-direction: column;
   gap: 22px;
   padding: 0 24px;
 }
 
-#SpicyLyricsPage .LyricsContainer .loaderContainer .loaderMessage {
+#BratLyricsPage .LyricsContainer .loaderContainer .loaderMessage {
   max-width: min(340px, 80%);
   margin: 0;
   text-align: center;

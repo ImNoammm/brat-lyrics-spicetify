@@ -95,9 +95,9 @@ const OpenPopupLyricsFlow = async () => {
     }
   });
 
-  // Copy the main SpicyLyrics style element
-  // Find any <style> element in the DOM that includes '#SpicyLyricsPage' in its textContent
-  // Find all <style> elements in the DOM that include '#SpicyLyricsPage' in their textContent
+  // Copy the main BratLyrics style element
+  // Find any <style> element in the DOM that includes '#BratLyricsPage' in its textContent
+  // Find all <style> elements in the DOM that include '#BratLyricsPage' in their textContent
   const spicyLyricsStyleElement = document.querySelector("#slstyles");
   let spicyLyricsStyleContent: string | null = null;
 

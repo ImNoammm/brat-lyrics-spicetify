@@ -1,30 +1,38 @@
-# Spicy Lyrics
+# brat lyrics
 
-### Check out our *[Sitee](https://yoursit.ee/lyrics)*
-#### Make your own at -> [https://yoursit.ee](https://yoursit.ee)
+Spotify lyrics that look like the cover of Charli xcx's *brat* — lowercase Arial Narrow, justified edge to edge, slightly out of focus, one line building up word by word.
 
-# How to install Spicy Lyrics
+I forked [Spicy Lyrics](https://github.com/spikerko/spicy-lyrics) and swapped out the renderer. Everything else is still Spicy's: the fetching, the word-level timing, the sidebar card, fullscreen, PiP.
 
-## 1. Using the Spicetify Marketplace (recommended)
-1. Search `Spicy Lyrics` under the "Extensions" tab
-2. Click the Install button on the Spicy Lyrics extension
-3. All done!
+## Install
 
-## 2. Externally (not recommended)
-1. Make sure you have [Spicetify](https://spicetify.app) installed
-2. Download the [spicy-lyrics.mjs](./builds/spicy-lyrics.mjs) file
-3. Put the file inside the Spicetify Extensions directory. Find the correct directory here: [https://spicetify.app/docs/customization/extensions#manual-installation](https://spicetify.app/docs/customization/extensions#manual-installation)
-4. Then, run ```spicetify config extensions spicy-lyrics.mjs```
-5. Then apply Spicetify by running ```spicetify apply```
-6. All done!
+You'll need [bun](https://bun.sh) and [spicetify](https://spicetify.app) already working.
 
-[![Github Version](https://img.shields.io/github/v/release/spikerko/spicy-lyrics)](https://github.com/spikerko/spicy-lyrics/) [![Github Stars badge](https://img.shields.io/github/stars/spikerko/spicy-lyrics?style=social)](https://github.com/spikerko/spicy-lyrics/) [![Discord Badge](https://dcbadge.limes.pink/api/server/uqgXU5wh8j?style=flat)](https://discord.com/invite/uqgXU5wh8j)
+```bash
+git clone https://github.com/ImNoammm/brat-lyrics-spicetify
+cd brat-lyrics-spicetify
+bun install
+python3 install-brat.py --install
+```
 
-Hi, I'm Spikerko (the person who made this repo). I've been really passionate about this project, and I'm really happy for this project.
+That builds the bundle, copies it into `~/.config/spicetify/Extensions/`, adds it to `config-xpui.ini` and runs `spicetify apply`. Restart Spotify after.
 
-I've seen a problem with the Spotify Lyrics. They're plain, just static colors. So I wanted to build my own version. And here it is: **Spicy Lyrics**. Hope you like it!
+Then hit the lyrics button in the playbar, or use the card in the now-playing sidebar.
 
-![Extension Example](./previews/page.gif)
+## Settings
 
+Gear icon, top right of the lyrics view. The one worth knowing about is **Palette**:
 
-*Inspired by [Beautiful Lyrics](https://github.com/surfbryce/beautiful-lyrics)*
+- *Match the cover* (default) — takes the background and text colours from the artwork
+- *Custom colours* — pick your own
+- *Classic* — black on white, like the real cover
+
+Fullscreen is the button next to it. Controls fade out after a couple of seconds if you stop moving the mouse.
+
+## Notes
+
+Works alongside normal Spicy Lyrics if you've got both — separate settings, separate playbar button.
+
+The Arial Narrow file in `assets/` is the same one bratgenerator.com uses, so the type actually matches instead of approximating it.
+
+AGPL-3.0, same as upstream.

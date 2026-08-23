@@ -127,7 +127,7 @@ export default async function ApplyDynamicBackground(element: HTMLElement, tag?:
   // The NPV lyrics card must stay transparent (the NPV's own background shows
   // through) — covers every caller that re-applies the page bg (songchange,
   // static-bg mode changes, etc.).
-  if (element.closest("#SpicyLyricsPage.CardMode")) return;
+  if (element.closest("#BratLyricsPage.CardMode")) return;
   dynamicBgLogger.debug("Applying dynamic background", { tag });
   const preCurrentImgCover = SpotifyPlayer.GetCover("large") ?? "";
   // Local-file art is served via the `spotify:local:` scheme and isn't on scdn,
@@ -465,7 +465,6 @@ $staticBackgroundMode.listen(reapplyPageBackground);
 // Blur is a pure paint change on the existing element, so push it straight into a
 // CSS var rather than tearing the background down and rebuilding it.
 //
-// The var goes on #SpicyLyricsPage itself, not just the root, because in PiP the
 // page lives in the popup's own document — that document's <html> never sees
 // anything we write here, so a root-only var falls back to 0px there.
 const applyStaticBackgroundBlur = (blur: number) => {

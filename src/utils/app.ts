@@ -1,5 +1,5 @@
 function isDev() {
-  return __SLdev__m;
+  return __BLdev__m;
 }
 
 const App = {

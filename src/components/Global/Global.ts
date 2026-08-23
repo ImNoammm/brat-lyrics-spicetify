@@ -1,7 +1,7 @@
 import Event from "../../utils/EventManager.ts";
 
-window._spicy_lyrics = {};
-const SCOPE_ROOT = window._spicy_lyrics;
+window._brat_lyrics = {};
+const SCOPE_ROOT = window._brat_lyrics;
 
 const Global = {
   Scope: SCOPE_ROOT,

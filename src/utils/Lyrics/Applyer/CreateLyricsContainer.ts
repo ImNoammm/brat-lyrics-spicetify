@@ -16,7 +16,7 @@ let lastMapIndex = -1;
 
 const CreateLyricsContainer = (): LyricsContainerReturnObject => {
   const Container = document.createElement("div");
-  Container.classList.add("SpicyLyricsScrollContainer");
+  Container.classList.add("BratLyricsScrollContainer");
 
   lastMapIndex += 1;
   const currentIndex = lastMapIndex;

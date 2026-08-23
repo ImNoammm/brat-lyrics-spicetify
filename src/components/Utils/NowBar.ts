@@ -95,7 +95,7 @@ function ApplyMarquee(baseWidth, elementWidth, name) {
             }
         }
     `;
-    style.id = `spicy-lyrics-marquee_${name}`;
+    style.id = `bratlyrics-marquee_${name}`;
     document.head.appendChild(style);
     ActiveMarquees.set(name, style);
     return {
@@ -710,7 +710,7 @@ function OpenNowBar(skipSaving: boolean = false) {
             }
             Spicetify.Player.setVolume(level);
           } catch (err) {
-            console.error("Spicy Lyrics: couldn't set the volume", err);
+            console.error("brat lyrics: couldn't set the volume", err);
           }
         };
 
@@ -778,7 +778,7 @@ function OpenNowBar(skipSaving: boolean = false) {
           try {
             Spicetify.Player.toggleMute();
           } catch (err) {
-            console.error("Spicy Lyrics: couldn't toggle mute", err);
+            console.error("brat lyrics: couldn't toggle mute", err);
             return;
           }
 
@@ -916,15 +916,15 @@ function OpenNowBar(skipSaving: boolean = false) {
 
   /* const DragBox = Fullscreen.IsOpen
         ? document.querySelector(
-              "#SpicyLyricsPage .ContentBox .NowBar .Header .MediaBox .MediaContent"
+              "#BratLyricsPage .ContentBox .NowBar .Header .MediaBox .MediaContent"
           )
         : document.querySelector(
-              "#SpicyLyricsPage .ContentBox .NowBar .Header .MediaBox .MediaImageContainer"
+              "#BratLyricsPage .ContentBox .NowBar .Header .MediaBox .MediaImageContainer"
           ); */
 
   /* {
         const dropZones = document.querySelectorAll(
-            "#SpicyLyricsPage .ContentBox .DropZone"
+            "#BratLyricsPage .ContentBox .DropZone"
         );
 
         DragBox.addEventListener("dragstart", (e) => {
@@ -932,7 +932,7 @@ function OpenNowBar(skipSaving: boolean = false) {
             if (missingLyrics) return;
 
             // Don't prevent default - allow the drag to start
-            document.querySelector("#SpicyLyricsPage").classList.add("SomethingDragging");
+            document.querySelector("#BratLyricsPage").classList.add("SomethingDragging");
             if (NowBar.classList.contains("LeftSide")) {
                 dropZones.forEach((zone) => {
                     if (zone.classList.contains("LeftSide")) {
@@ -956,7 +956,7 @@ function OpenNowBar(skipSaving: boolean = false) {
         DragBox.addEventListener("dragend", () => {
             const missingLyrics = $currentLyricsData.get() === `NO_LYRICS:${SpotifyPlayer.GetSongId()}`;
             if (missingLyrics) return;
-            document.querySelector("#SpicyLyricsPage").classList.remove("SomethingDragging");
+            document.querySelector("#BratLyricsPage").classList.remove("SomethingDragging");
             dropZones.forEach((zone) => zone.classList.remove("Hidden"));
             DragBox.classList.remove("Dragging");
         });
@@ -992,9 +992,9 @@ function OpenNowBar(skipSaving: boolean = false) {
                 NowBar.classList.remove(currentClass);
                 NowBar.classList.add(newClass);
 
-                document.querySelector("#SpicyLyricsPage").classList.remove("NowBarSide__Left");
-                document.querySelector("#SpicyLyricsPage").classList.remove("NowBarSide__Right");
-                document.querySelector("#SpicyLyricsPage").classList.add(`NowBarSide__${newClass.replace("Side", "")}`);
+                document.querySelector("#BratLyricsPage").classList.remove("NowBarSide__Left");
+                document.querySelector("#BratLyricsPage").classList.remove("NowBarSide__Right");
+                document.querySelector("#BratLyricsPage").classList.add(`NowBarSide__${newClass.replace("Side", "")}`);
 
                 const side = zone.classList.contains("RightSide") ? "right" : "left";
 
@@ -1140,7 +1140,7 @@ async function getAVCStreamUrl(manifestUrl: string) {
 } */
 
 /* function UpdateNowBar(force = false) {
-    const NowBar = document.querySelector("#SpicyLyricsPage .ContentBox .NowBar");
+    const NowBar = document.querySelector("#BratLyricsPage .ContentBox .NowBar");
     if (!NowBar) return;
 
     //const ArtistsDiv = NowBar.querySelector(".Header .Metadata .Artists");
@@ -1509,7 +1509,7 @@ function Session_NowBar_SetSide() {
 
 function DeregisterNowBarBtn() {
   /* const nowBarButton = document.querySelector(
-        "#SpicyLyricsPage .ContentBox .ViewControls #NowBarToggle"
+        "#BratLyricsPage .ContentBox .ViewControls #NowBarToggle"
     );
     nowBarButton?.remove(); */
   PageView.AppendViewControls(true);

@@ -300,7 +300,7 @@ export function FilterDropdown({
   const portalTarget =
     open && typeof document !== "undefined"
       ? (document.querySelector(
-          "sl-generic-modal.SpicyLyricsModal .sl-modal-overlay"
+          "sl-generic-modal.BratLyricsModal .sl-modal-overlay"
         ) as HTMLElement | null)
       : null;
 
@@ -398,5 +398,22 @@ export function FilterDropdown({
           portalTarget
         )}
     </div>
+  );
+}
+
+export function ColorInput({
+  value,
+  onChange,
+}: {
+  value: string;
+  onChange: (v: string) => void;
+}) {
+  return (
+    <input
+      type="color"
+      className="sl-color-input"
+      value={value}
+      onChange={(e) => onChange(e.target.value)}
+    />
   );
 }

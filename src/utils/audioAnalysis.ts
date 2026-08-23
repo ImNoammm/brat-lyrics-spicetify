@@ -21,7 +21,7 @@ function getCosmosErrorStatus(error: unknown): number | undefined {
     return undefined;
 }
 
-export const AudioAnalysisStore = GetExpireStore<CachedAudioAnalysis>("SpicyLyrics_AudioAnalysis", 1, {
+export const AudioAnalysisStore = GetExpireStore<CachedAudioAnalysis>("BratLyrics_AudioAnalysis", 1, {
     Duration: 1,
     Unit: "Months"
 });
