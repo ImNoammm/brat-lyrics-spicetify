@@ -27,7 +27,7 @@ Gear icon, top right of the lyrics view. The one worth knowing about is **Palett
 
 - *Match the cover* (default) — takes the background and text colours from the artwork
 - *Custom colours* — pick your own
-- *Classic* — black on white, like the real cover
+- *Classic* — black on white
 
 Fullscreen is the button next to it. Controls fade out after a couple of seconds if you stop moving the mouse.
 
