@@ -1,36 +1,30 @@
 [
   {
     "name": "brat lyrics",
-    "description": "brat lyrics is a better lyrics experience (compared to Spotify Lyrics) for Spotify. It brings word-by-word lyrics (karaoke style), beautiful animations, and more. Come and give it a try!",
-    "preview": "./previews/V3latest_smallcard_preview.webp",
-    "main": "./builds/bratlyrics.mjs",
+    "description": "Spotify lyrics that look like the cover of Charli xcx's brat — lowercase Arial Narrow, justified edge to edge, slightly out of focus, one line building up word by word. Colours can follow the album art. A fork of Spicy Lyrics with the renderer swapped out.",
+    "preview": "./previews/brat-preview.png",
+    "main": "./builds/bratlyrics.js",
     "readme": "README.md",
     "branch": "main",
     "authors": [
       {
-        "name": "Spikerko",
+        "name": "ImNoammm",
+        "url": "https://github.com/ImNoammm"
+      },
+      {
+        "name": "Spikerko (original Spicy Lyrics)",
         "url": "https://github.com/Spikerko"
       }
     ],
     "tags": [
       "lyrics",
-      "spicy-lyrics",
+      "brat",
+      "charli-xcx",
       "word-to-word-lyrics",
       "karaoke",
-      "spicetify",
       "syllable-lyrics",
-      "syllable",
-      "smooth",
-      "beautiful",
-      "spicy",
-      "animated",
-      "background",
-      "backgrounds",
-      "dynamic",
-      "pretty",
-      "romanization",
-      "romaji",
-      "pinyin",
+      "fullscreen",
+      "minimal",
       "customizable"
     ]
   }
