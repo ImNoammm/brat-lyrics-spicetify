@@ -960,19 +960,28 @@ async function main() {
           clearTimeout(lastTimeout);
           lastTimeout = undefined;
         }
-        lastTimeout = setTimeout(async () => {
+        lastTimeout = setTimeout(() => {
+          // Safety net: whatever is on screen belongs to `$currentLyricsData`.
+          // If that payload (or "no lyrics" sentinel) is for a different track
+          // than the one playing, the pipeline was raced — re-fetch so the
+          // playing track gets its own lyrics instead of the previous track's.
           const currentSongLyrics = $currentLyricsData.get();
-          if (
-            currentSongLyrics &&
-            currentSongLyrics !== `NO_LYRICS:${SpotifyPlayer.GetUri()}`
-          ) {
-            const parsedLyrics = JSON.parse(currentSongLyrics);
-            if (parsedLyrics?.uri !== SpotifyPlayer.GetUri()) {
-              const refetchUri = SpotifyPlayer.GetUri();
-              if (refetchUri) {
-                fetchLyrics(refetchUri).then(ApplyLyrics);
-              }
+          const refetchUri = SpotifyPlayer.GetUri();
+          if (!currentSongLyrics || !refetchUri) return;
+
+          let appliedUri: string | null = null;
+          if (currentSongLyrics.startsWith("NO_LYRICS:")) {
+            appliedUri = currentSongLyrics.slice("NO_LYRICS:".length);
+          } else {
+            try {
+              appliedUri = JSON.parse(currentSongLyrics)?.uri ?? null;
+            } catch {
+              appliedUri = null;
             }
+          }
+
+          if (appliedUri !== refetchUri) {
+            fetchLyrics(refetchUri).then(ApplyLyrics);
           }
         }, 1000);
       });

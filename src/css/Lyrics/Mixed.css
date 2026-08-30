@@ -227,6 +227,13 @@
   display: inline-block;
 }
 
+/* A letter that is just whitespace collapses to a 0px inline-block, which glues
+   multi-word syllables together. Keep the space rendered and give it a floor. */
+#BratLyricsPage.SpicyRenderer .LyricsContainer .LyricsContent .line .letter.SpaceLetter {
+  white-space: pre;
+  min-width: 0.3ch;
+}
+
 #BratLyricsPage.SpicyRenderer .LyricsContainer .LyricsContent .line.Active,
 #BratLyricsPage.SpicyRenderer .LyricsContainer .LyricsContent .line.Active .word,
 #BratLyricsPage.SpicyRenderer .LyricsContainer .LyricsContent .line.Active .letter,
@@ -596,12 +603,29 @@
   transform: translateY(calc(var(--DefaultLyricsSize) * 0)) !important;
 } */
 
+/* Exp_DuetLinePadding — how far a duet line is inset on the side it leans away
+   from. On, the inset is wide enough that the two voices read as separate
+   columns; off, duet lines keep the same slight padding every other line gets. */
+#BratLyricsPage.SpicyRenderer
+  .LyricsContainer
+  .LyricsContent
+  .BratLyricsScrollContainer.HasDuetLines {
+  --DuetLineInset: 5cqw;
+}
+
+#BratLyricsPage.SpicyRenderer.Exp_DuetLinePadding
+  .LyricsContainer
+  .LyricsContent
+  .BratLyricsScrollContainer.HasDuetLines {
+  --DuetLineInset: 15cqw;
+}
+
 #BratLyricsPage.SpicyRenderer
   .LyricsContainer
   .LyricsContent
   .BratLyricsScrollContainer.HasDuetLines
   .line.OppositeAligned:not(.rtl) {
-  padding-left: 15cqw;
+  padding-left: var(--DuetLineInset);
 }
 
 #BratLyricsPage.SpicyRenderer
@@ -609,7 +633,7 @@
   .LyricsContent
   .BratLyricsScrollContainer.HasDuetLines
   .line:not(.OppositeAligned, .rtl) {
-  padding-right: 15cqw;
+  padding-right: var(--DuetLineInset);
 }
 
 #BratLyricsPage.SpicyRenderer
@@ -617,7 +641,7 @@
   .LyricsContent
   .BratLyricsScrollContainer.HasDuetLines.HasRtlLines
   .line.OppositeAligned.rtl {
-  padding-right: 15cqw;
+  padding-right: var(--DuetLineInset);
 }
 
 #BratLyricsPage.SpicyRenderer
@@ -625,7 +649,7 @@
   .LyricsContent
   .BratLyricsScrollContainer.HasDuetLines.HasRtlLines
   .line.rtl:not(.OppositeAligned) {
-  padding-left: 15cqw;
+  padding-left: var(--DuetLineInset);
 }
 
 #BratLyricsPage.SpicyRenderer .LyricsContainer .LyricsContent .BratLyricsScrollContainer:not(.HasDuetLines) .line {
