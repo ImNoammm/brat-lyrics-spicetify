@@ -4,7 +4,6 @@ import BratSection from "./BratSection.tsx";
 import CacheSection from "./CacheSection.tsx";
 import DeveloperSection from "./DeveloperSection.tsx";
 import ExperimentsSection from "./ExperimentsSection.tsx";
-import Footer from "./Footer.tsx";
 import InterfaceSection from "./InterfaceSection.tsx";
 import PlaybackSection from "./PlaybackSection.tsx";
 import { FilterDropdown, SearchBar } from "./components.tsx";
@@ -41,8 +40,6 @@ export default function SettingsPanel({ onOpenExperiments }: { onOpenExperiments
       />
       <DeveloperSection query={query} sectionFilter={sectionFilter} />
       <CacheSection query={query} sectionFilter={sectionFilter} />
-
-      <Footer />
     </div>
   );
 }
